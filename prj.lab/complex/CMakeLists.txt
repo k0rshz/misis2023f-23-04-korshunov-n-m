@@ -1,0 +1,3 @@
+add_executable(test_complex test_complex.cpp)
+add_library(complex complex.hpp complex.cpp)
+target_link_libraries(test_complex complex)
