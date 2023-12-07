@@ -4,7 +4,7 @@ int main() {
 	testParse("{8.9,9}");
 	testParse("{8.9, 9}");
 	testParse("{8.9,9");
-	std::cout << std::endl;
+	std::cout << "\n";
 
 	Complex x, y;
 	double d;
