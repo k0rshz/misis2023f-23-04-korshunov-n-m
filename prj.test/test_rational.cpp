@@ -52,9 +52,10 @@ TEST_CASE("/") {
 	CHECK_THROWS(Rational(4, 6) / int64_t(0));
 }
 
-TEST_CASE("inc_dec") {
+TEST_CASE("inc_dec_unarminus") {
 	CHECK(Rational(13, 5) == (++Rational(8, 5)));
 	CHECK(Rational(8, 5) == (--Rational(13, 5)));
+	CHECK(Rational(-33, 6) == (-Rational(11, 2)));
 }
 
 TEST_CASE("cut_back") {

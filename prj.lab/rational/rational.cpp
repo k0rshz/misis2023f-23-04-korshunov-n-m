@@ -116,6 +116,11 @@ Rational& Rational::operator--() {
 	return *this;
 }
 
+Rational& Rational::operator-() {
+	n_ *= -1;
+	return *this;
+}
+
 Rational operator+(const Rational& lhs, const Rational& rhs) {
 	Rational sum(lhs);
 	sum += rhs;
