@@ -30,7 +30,7 @@ public:
 	Rational& operator/=(const int64_t rhs) { return operator/=(Rational(rhs)); }
 	Rational& operator++();
 	Rational& operator--();
-	bool operator==(const Rational& rhs) const { return (rhs.n_ == n_) && (rhs.de_ == de_); }
+	bool operator==(const Rational& rhs) const { return ((rhs.n_ == n_) && (rhs.de_ == de_)) || ((rhs.n_ == 0) && (n_ == 0)); }
 	bool operator!=(const Rational& rhs) const { return !operator==(rhs); }
 	std::ostream& writeTo(std::ostream& ostrm) const;
 	std::istream& readFrom(std::istream& istrm);

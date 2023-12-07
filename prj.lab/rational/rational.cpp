@@ -173,21 +173,30 @@ Rational operator*(const int64_t& lhs, const Rational& rhs) {
 
 Rational operator/(const Rational& lhs, const Rational& rhs) {
 	Rational del(lhs);
-	del /= rhs;
-	return del;
+	if (rhs.get_Num() != 0) {
+		del /= rhs;
+		return del;
+	}
+	throw std::overflow_error("Error: Division by zero");
 }
 
 Rational operator/(const Rational& lhs, const int64_t& rhs) {
 	Rational del(lhs);
-	del /= rhs;
-	return del;
+	if (rhs != 0) {
+		del /= rhs;
+		return del;
+	}
+	throw std::overflow_error("Error: Division by zero");
 }
 
 Rational operator/(const int64_t& lhs, const Rational& rhs) {
 	Rational del(1, 1);
-	del /= rhs;
-	del *= lhs;
-	return del;
+	if (rhs.get_Num() != 0) {
+		del /= rhs;
+		del *= lhs;
+		return del;
+	}
+	throw std::overflow_error("Error: Division by zero");
 }
 
 bool operator==(const Rational& lhs, const int64_t& rhs) {
