@@ -1,6 +1,6 @@
 #include "rational.hpp"
 
-Rational::Rational(const int64_t num, const int64_t denum)
+Rational::Rational(const std::int64_t num, const std::int64_t denum)
 	: n_(num), de_(denum) {
 	if (0 == de_) {
 		throw std::invalid_argument("Zero denumenator in Rational ctor");
@@ -26,17 +26,17 @@ std::istream& operator>>(std::istream& istrm, Rational& rhs)
 	return rhs.readFrom(istrm);
 }
 
-int64_t Rational::NOK(int64_t x, int64_t y) {
-	int64_t z = 2;
+std::int64_t Rational::NOK(std::int64_t x, std::int64_t y) {
+	std::int64_t z = 2;
 	while (z % x != 0 || z % y != 0) {
 		z++;
 	}
 	return z;
 }
 
-int64_t Rational::NOD(int64_t x, int64_t y) {
+std::int64_t Rational::NOD(std::int64_t x, std::int64_t y) {
 	if (x != 0 && y != 0) {
-		int64_t z = std::min(std::abs(x), y);
+		std::int64_t z = std::min(std::abs(x), y);
 		while (std::abs(x) % z != 0 || y % z != 0) {
 			z--;
 		}
@@ -46,14 +46,14 @@ int64_t Rational::NOD(int64_t x, int64_t y) {
 }
 
 void Rational::cut_back() {
-	int64_t d = Rational::NOD(n_, de_);
+	std::int64_t d = Rational::NOD(n_, de_);
 	if (d != 0) {
 		n_ /= d;
 		de_ /= d;
 	}
 }
 
-Rational::Rational(const int64_t num)
+Rational::Rational(const std::int64_t num)
 	: Rational(num, 1)
 {
 }
@@ -69,7 +69,7 @@ Rational& Rational::operator+=(const Rational& rhs) {
 		n_ += rhs.n_;
 	}
 	else {
-		int64_t a = Rational::NOK(de_, rhs.de_);
+		std::int64_t a = Rational::NOK(de_, rhs.de_);
 		n_ = n_ * a / de_ + rhs.n_ * a / rhs.de_;
 		de_ = a;
 	}
@@ -96,7 +96,7 @@ Rational& Rational::operator-=(const Rational& rhs) {
 		n_ -= rhs.n_;
 	}
 	else {
-		int64_t a = Rational::NOK(de_, rhs.de_);
+		std::int64_t a = Rational::NOK(de_, rhs.de_);
 		n_ = n_ * a / de_ - rhs.n_ * a / rhs.de_;
 		de_ = a;
 	}
@@ -127,13 +127,13 @@ Rational operator+(const Rational& lhs, const Rational& rhs) {
 	return sum;
 }
 
-Rational operator+(const Rational& lhs, const int64_t& rhs) {
+Rational operator+(const Rational& lhs, const std::int64_t& rhs) {
 	Rational sum(lhs);
 	sum += rhs;
 	return sum;
 }
 
-Rational operator+(const int64_t& lhs, const Rational& rhs) {
+Rational operator+(const std::int64_t& lhs, const Rational& rhs) {
 	Rational sum(rhs);
 	sum += lhs;
 	return sum;
@@ -145,13 +145,13 @@ Rational operator-(const Rational& lhs, const Rational& rhs) {
 	return minus;
 }
 
-Rational operator-(const Rational& lhs, const int64_t& rhs) {
+Rational operator-(const Rational& lhs, const std::int64_t& rhs) {
 	Rational minus(lhs);
 	minus -= rhs;
 	return minus;
 }
 
-Rational operator-(const int64_t& lhs, const Rational& rhs) {
+Rational operator-(const std::int64_t& lhs, const Rational& rhs) {
 	Rational minus(rhs);
 	minus -= lhs;
 	minus *= -1;
@@ -164,13 +164,13 @@ Rational operator*(const Rational& lhs, const Rational& rhs) {
 	return umn;
 }
 
-Rational operator*(const Rational& lhs, const int64_t& rhs) {
+Rational operator*(const Rational& lhs, const std::int64_t& rhs) {
 	Rational umn(lhs);
 	umn *= rhs;
 	return umn;
 }
 
-Rational operator*(const int64_t& lhs, const Rational& rhs) {
+Rational operator*(const std::int64_t& lhs, const Rational& rhs) {
 	Rational umn(rhs);
 	umn *= lhs;
 	return umn;
@@ -185,7 +185,7 @@ Rational operator/(const Rational& lhs, const Rational& rhs) {
 	throw std::overflow_error("Error: Division by zero");
 }
 
-Rational operator/(const Rational& lhs, const int64_t& rhs) {
+Rational operator/(const Rational& lhs, const std::int64_t& rhs) {
 	Rational del(lhs);
 	if (rhs != 0) {
 		del /= rhs;
@@ -194,7 +194,7 @@ Rational operator/(const Rational& lhs, const int64_t& rhs) {
 	throw std::overflow_error("Error: Division by zero");
 }
 
-Rational operator/(const int64_t& lhs, const Rational& rhs) {
+Rational operator/(const std::int64_t& lhs, const Rational& rhs) {
 	Rational del(1, 1);
 	if (rhs.get_Num() != 0) {
 		del /= rhs;
@@ -204,28 +204,28 @@ Rational operator/(const int64_t& lhs, const Rational& rhs) {
 	throw std::overflow_error("Error: Division by zero");
 }
 
-bool operator==(const Rational& lhs, const int64_t& rhs) {
+bool operator==(const Rational& lhs, const std::int64_t& rhs) {
 	if (lhs.get_Num() == rhs && lhs.get_Den() == 1) {
 		return true;
 	}
 	return false;
 }
 
-bool operator==(const int64_t& lhs, const Rational& rhs) {
+bool operator==(const std::int64_t& lhs, const Rational& rhs) {
 	if (rhs.get_Num() == lhs && rhs.get_Den() == 1) {
 		return true;
 	}
 	return false;
 }
 
-bool operator!=(const Rational& lhs, const int64_t& rhs) {
+bool operator!=(const Rational& lhs, const std::int64_t& rhs) {
 	if (lhs.get_Num() == rhs && lhs.get_Den() == 1) {
 		return false;
 	}
 	return true;
 }
 
-bool operator!=(const int64_t& lhs, const Rational& rhs) {
+bool operator!=(const std::int64_t& lhs, const Rational& rhs) {
 	if (rhs.get_Num() == lhs && rhs.get_Den() == 1) {
 		return false;
 	}
@@ -238,13 +238,13 @@ bool operator>=(const Rational& lhs, const Rational& rhs) {
 	return (a.get_Num() >= 0);
 }
 
-bool operator>=(const Rational& lhs, const int64_t& rhs) {
+bool operator>=(const Rational& lhs, const std::int64_t& rhs) {
 	Rational a(lhs);
 	a -= rhs;
 	return (a.get_Num() >= 0);
 }
 
-bool operator>=(const int64_t& lhs, const Rational& rhs) {
+bool operator>=(const std::int64_t& lhs, const Rational& rhs) {
 	Rational a;
 	a = lhs - rhs;
 	return (a.get_Num() >= 0);
@@ -256,13 +256,13 @@ bool operator<=(const Rational& lhs, const Rational& rhs) {
 	return (a.get_Num() <= 0);
 }
 
-bool operator<=(const Rational& lhs, const int64_t& rhs) {
+bool operator<=(const Rational& lhs, const std::int64_t& rhs) {
 	Rational a(lhs);
 	a -= rhs;
 	return (a.get_Num() <= 0);
 }
 
-bool operator<=(const int64_t& lhs, const Rational& rhs) {
+bool operator<=(const std::int64_t& lhs, const Rational& rhs) {
 	Rational a;
 	a = lhs - rhs;
 	return (a.get_Num() <= 0);
@@ -274,13 +274,13 @@ bool operator>(const Rational& lhs, const Rational& rhs) {
 	return (a.get_Num() > 0);
 }
 
-bool operator>(const Rational& lhs, const int64_t& rhs) {
+bool operator>(const Rational& lhs, const std::int64_t& rhs) {
 	Rational a(lhs);
 	a -= rhs;
 	return (a.get_Num() > 0);
 }
 
-bool operator>(const int64_t& lhs, const Rational& rhs) {
+bool operator>(const std::int64_t& lhs, const Rational& rhs) {
 	Rational a;
 	a = lhs - rhs;
 	return (a.get_Num() > 0);
@@ -292,13 +292,13 @@ bool operator<(const Rational& lhs, const Rational& rhs) {
 	return (a.get_Num() < 0);
 }
 
-bool operator<(const Rational& lhs, const int64_t& rhs) {
+bool operator<(const Rational& lhs, const std::int64_t& rhs) {
 	Rational a(lhs);
 	a -= rhs;
 	return (a.get_Num() < 0);
 }
 
-bool operator<(const int64_t& lhs, const Rational& rhs) {
+bool operator<(const std::int64_t& lhs, const Rational& rhs) {
 	Rational a;
 	a = lhs - rhs;
 	return (a.get_Num() < 0);
@@ -311,8 +311,8 @@ std::ostream& Rational::writeTo(std::ostream& ostrm) const {
 
 std::istream& Rational::readFrom(std::istream& istrm) {
 	char separator(0);
-	int64_t num(0);
-	int64_t denum(0);
+	std::int64_t num(0);
+	std::int64_t denum(0);
 	istrm >> num >> separator >> denum;
 	if (istrm.good()) {
 		if ((Rational::separator == separator)) {
