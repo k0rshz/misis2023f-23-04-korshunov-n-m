@@ -3,7 +3,7 @@
 Rational::Rational(const std::int64_t num, const std::int64_t denum)
 	: n_(num), de_(denum) {
 	if (0 == de_) {
-		throw std::invalid_argument("Zero denumenator in Rational ctor");
+		throw std::overflow_error("Error: Division by zero");
 	}
 	if (de_ < 0) {
 		de_ = -denum;
