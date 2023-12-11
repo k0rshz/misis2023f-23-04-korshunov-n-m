@@ -9,7 +9,7 @@ public:
     DynArr() = default;
     DynArr(const DynArr&) = default; // нельзя дефолтным
     DynArr(const std::ptrdiff_t size);
-    ~DynArr() = default;
+    ~DynArr() = default; // нельзя дефолтным
     [[nodiscard]] DynArr& operator=(const DynArr&) = default; // нельзя дефолтным
 
     [[nodiscard]] std::ptrdiff_t Size() const noexcept;

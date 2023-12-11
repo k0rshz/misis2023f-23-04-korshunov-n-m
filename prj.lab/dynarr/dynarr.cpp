@@ -5,7 +5,7 @@ std::ptrdiff_t DynArr::Size() const noexcept {
 }
 
 DynArr::DynArr(const std::ptrdiff_t sizeNew) {
-    if (sizeNew < 0) {
+    if (sizeNew <= 0) {
         throw std::overflow_error("Error: Size cannot be less than or equal to zero");
     }
     size_ = sizeNew;
