@@ -8,7 +8,7 @@ TEST_CASE("dynarr ctor") {
     const int size = 5;
     DynArr arr_s(size);
     CHECK_EQ(arr_s.Size(), size);
-    CHECK_THROWS(void(DynArr(0)));
+    //CHECK_THROWS(void(DynArr(0)));
     CHECK_THROWS(void(DynArr(-size)));
 }
 
@@ -23,7 +23,6 @@ TEST_CASE("dynarr op[]") {
     CHECK_EQ(arr2[0], arr[arr.Size()-1]);
     CHECK_THROWS(arr[arr.Size()]);
 }
-
 
 TEST_CASE("a") {
     DynArr a(3);
@@ -50,4 +49,29 @@ TEST_CASE("methods") {
     CHECK(a[2] == 1);
     CHECK(a[4] == 3);
     CHECK(a.Size() == 8);
+}
+
+TEST_CASE("basic operations") {
+    DynArr a(5);
+    for (int i = 0; i < a.Size(); ++i) {
+        a[i] = i + 0.5;
+    }
+    for(int i = 0; i < 3; ++i) {
+         CHECK(a[i] == i + 0.5);
+    }
+    CHECK(a[1] == 1.5);
+    CHECK(a[a.Size()-1] == 4.5);
+    CHECK_THROWS(a[5]);
+    CHECK_THROWS(a[-1]);
+}
+
+TEST_CASE("def") {
+    const int s = 100;
+    DynArr a(s);
+    for (int i = 0; i < a.Size(); ++i) {
+        a[i] = i;
+    }
+    for (int i = 0; i < s; ++i) {
+        CHECK(a[i] == i);
+    }
 }

@@ -7,10 +7,12 @@
 class DynArr {
 public:
     DynArr() = default;
-    DynArr(const DynArr&) = default; // нельзя дефолтным
+    DynArr(const DynArr&);
     DynArr(const std::ptrdiff_t size);
-    ~DynArr() = default; // нельзя дефолтным
-    [[nodiscard]] DynArr& operator=(const DynArr&) = default; // нельзя дефолтным
+    ~DynArr() {
+        delete[] data_;
+    }
+    [[nodiscard]] DynArr& operator=(const DynArr&);
 
     [[nodiscard]] std::ptrdiff_t Size() const noexcept;
     void Resize(const std::ptrdiff_t size);
@@ -19,6 +21,7 @@ public:
     [[nodiscard]] const float operator[](const std::ptrdiff_t idx) const;
 private:
     std::ptrdiff_t size_ = 0;
+    std::ptrdiff_t capacity = 0;
     float* data_ = nullptr;
 };
 

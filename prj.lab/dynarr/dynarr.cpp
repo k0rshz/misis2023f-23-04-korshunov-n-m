@@ -4,12 +4,39 @@ std::ptrdiff_t DynArr::Size() const noexcept {
     return size_;
 }
 
+DynArr::DynArr(DynArr const& a)
+    : size_(a.size_), capacity(a.capacity) {
+    data_ = new float[capacity] {};
+    for (int i = 0; i < size_; ++i) {
+        data_[i] = a.data_[i];
+    }
+}
+
 DynArr::DynArr(const std::ptrdiff_t sizeNew) {
-    if (sizeNew <= 0) {
+    if (sizeNew < 0) {
         throw std::overflow_error("Error: Size cannot be less than or equal to zero");
     }
+    else if (sizeNew == 0) {
+        size_ = 0;
+        capacity = 0;
+        data_ = nullptr;
+    }
     size_ = sizeNew;
-    data_ = new float[sizeNew] {};
+    capacity = sizeNew * 2;
+    data_ = new float[2 * sizeNew] {};
+}
+
+DynArr& DynArr::operator=(DynArr const& rhs) {
+    if (this != &rhs) {
+        delete[] data_;
+        size_ = rhs.size_;
+        capacity = rhs.size_ * 2;
+        data_ = new float[capacity] {};
+        for (int i = 0; i < rhs.size_; ++i) {
+            data_[i] = rhs.data_[i];
+        }
+    }
+    return *this;
 }
 
 float& DynArr::operator[](const std::ptrdiff_t idx) {
@@ -30,15 +57,15 @@ void DynArr::Resize(const std::ptrdiff_t sizeNew) {
     if (sizeNew <= 0) {
         throw std::overflow_error("Error: Size cannot be less than or equal to zero");
     }
-    if (sizeNew > size_) {
-        float* pNewData = new float[sizeNew] {};
-        for (std::ptrdiff_t i = 0; i < size_; ++i) {
+    if (sizeNew > capacity) {
+        capacity = sizeNew * 2;
+        float* pNewData = new float[capacity] {};
+        for (std::ptrdiff_t i = 0; i < this->size_; ++i) {
             pNewData[i] = data_[i];
         }
-        for (std::ptrdiff_t i = size_; i < sizeNew; ++i) {
+        for (std::ptrdiff_t i = this->size_; i < sizeNew; ++i) {
             pNewData[i] = 0;
         }
-        //delete[] data_;
         data_ = pNewData;
     }
     size_ = sizeNew;

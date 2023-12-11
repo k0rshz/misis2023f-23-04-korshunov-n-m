@@ -327,7 +327,7 @@ std::istream& Rational::readFrom(std::istream& istrm) {
 	std::int64_t num(0);
 	std::int64_t denum(0);
 	istrm >> num >> separator >> denum;
-	if ((istrm.good()) || (!istrm.fail() && !istrm.bad() && istrm.eofbit)) {
+	if ((istrm.good()) || (!istrm.fail() && !istrm.bad() && istrm.eof())) {
 		if (Rational::separator == separator && denum!=0) {
 			n_ = num;
 			de_ = denum;
