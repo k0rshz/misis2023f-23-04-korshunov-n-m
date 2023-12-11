@@ -6,9 +6,11 @@
 #include <limits>
 
 struct Complex {
-	Complex() {}
-	~Complex() {}
+	Complex() = default;
+	~Complex() = default;
 	explicit Complex(const double real);
+	Complex(Complex&&) = default;
+	Complex(const Complex& rhs) = default;
 	Complex(const double real, const double imaginary);
 	Complex& operator+=(const Complex& rhs);
 	Complex& operator+=(const double rhs) { return operator+=(Complex(rhs)); }
@@ -18,7 +20,7 @@ struct Complex {
 	Complex& operator*=(const double rhs) { return operator*=(Complex(rhs)); }
 	Complex& operator/=(const Complex& rhs);
 	Complex& operator/=(const double rhs) { return operator/=(Complex(rhs)); }
-	Complex& operator=(const Complex& rhs);
+	Complex& operator=(const Complex&) = default;
 	Complex& operator=(const double rhs) { return operator=(Complex(rhs)); }
 	Complex& operator-();
 	bool operator==(const Complex& rhs) const { return (std::abs(re - rhs.re) < 4*std::numeric_limits<double>::epsilon()) && (std::abs(im - rhs.im) < 4*std::numeric_limits<double>::epsilon()); }

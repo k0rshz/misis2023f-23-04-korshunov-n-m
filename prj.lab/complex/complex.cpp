@@ -50,13 +50,6 @@ Complex::Complex(const double real, const double imaginary)
 {
 }
 
-Complex& Complex::operator=(const Complex& rhs)
-{
-	re = rhs.re;
-	im = rhs.im;
-	return *this;
-}
-
 Complex& Complex::operator+=(const Complex& rhs)
 {
 	re += rhs.re;
