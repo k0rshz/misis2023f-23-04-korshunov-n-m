@@ -49,6 +49,8 @@ private:
 	std::int64_t NOK(std::int64_t x, std::int64_t y);
 };
 
+bool testParse(const std::string& str);
+
 std::ostream& operator<<(std::ostream& ostrm, const Rational& rhs);
 std::istream& operator>>(std::istream& istrm, Rational& rhs);
 

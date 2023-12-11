@@ -47,6 +47,7 @@ TEST_CASE("methods") {
 
     a.Insert(1, 3);
     CHECK(a[1] == 3);
+    CHECK(a[2] == 1);
     CHECK(a[4] == 3);
     CHECK(a.Size() == 8);
 }

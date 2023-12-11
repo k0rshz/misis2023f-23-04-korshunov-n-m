@@ -304,6 +304,19 @@ bool operator<(const std::int64_t& lhs, const Rational& rhs) {
 	return (a.get_Num() < 0);
 }
 
+bool testParse(const std::string& str) {
+	std::istringstream istrm(str);
+	Rational z;
+	istrm >> z;
+	if ((istrm.good()) || (!istrm.fail() && !istrm.bad() && istrm.eofbit)) {
+		std::cout << "Read success: " << str << " -> " << z << "\n";
+	}
+	else {
+		std::cout << "Read error: " << str << " -> " << z << "\n";
+	}
+	return istrm.good();
+}
+
 std::ostream& Rational::writeTo(std::ostream& ostrm) const {
 	ostrm << n_ << separator << de_;
 	return ostrm;
@@ -314,8 +327,8 @@ std::istream& Rational::readFrom(std::istream& istrm) {
 	std::int64_t num(0);
 	std::int64_t denum(0);
 	istrm >> num >> separator >> denum;
-	if (istrm.good()) {
-		if ((Rational::separator == separator)) {
+	if ((istrm.good()) || (!istrm.fail() && !istrm.bad() && istrm.eofbit)) {
+		if (Rational::separator == separator && denum!=0) {
 			n_ = num;
 			de_ = denum;
 		}
