@@ -32,24 +32,6 @@ double getIm(const Complex& lhs) {
 	return lhs.im;
 }
 
-Complex& Complex::operator-() {
-	re *= -1;
-	im *= -1;
-	return *this;
-}
-
-
-Complex::Complex(const double real)
-	: Complex(real, 0.0)
-{
-}
-
-Complex::Complex(const double real, const double imaginary)
-	: re(real)
-	, im(imaginary)
-{
-}
-
 Complex& Complex::operator+=(const Complex& rhs)
 {
 	re += rhs.re;
@@ -175,7 +157,7 @@ Complex operator/(const double& lhs, const Complex& rhs)
 
 bool operator==(const Complex& lhs, const double& rhs) 
 {
-	if (lhs.im == 0 && std::abs(lhs.re - rhs) < 4*std::numeric_limits<double>::epsilon()) {
+	if (lhs.im == 0 && std::abs(lhs.re - rhs) < eps) {
 		return true;
 	}
 	return false;
@@ -183,7 +165,7 @@ bool operator==(const Complex& lhs, const double& rhs)
 
 bool operator==(const double& lhs, const Complex& rhs)
 {
-	if (rhs.im == 0 && std::abs(rhs.re - lhs) < 4*std::numeric_limits<double>::epsilon()) {
+	if (rhs.im == 0 && std::abs(rhs.re - lhs) < eps) {
 		return true;
 	}
 	return false;
