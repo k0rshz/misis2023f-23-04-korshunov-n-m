@@ -9,6 +9,10 @@ Rational::Rational(const std::int64_t num, const std::int64_t denum)
 		de_ = -denum;
 		n_ = -num;
 	}
+	else if (n_ == 0) {
+		n_ = num;
+		de_ = 1;
+	}
 	else {
 		n_ = num;
 		de_ = denum;
