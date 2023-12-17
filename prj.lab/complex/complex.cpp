@@ -77,14 +77,14 @@ Complex operator+(const Complex& lhs, const Complex& rhs)
 	return sum;
 }
 
-Complex operator+(const Complex& lhs, const double& rhs)
+Complex operator+(const Complex& lhs, const double rhs)
 {
 	Complex sum(lhs);
 	sum += rhs;
 	return sum;
 }
 
-Complex operator+(const double& lhs, const Complex& rhs)
+Complex operator+(const double lhs, const Complex& rhs)
 {
 	Complex sum(rhs);
 	sum += lhs;
@@ -98,14 +98,14 @@ Complex operator-(const Complex& lhs, const Complex& rhs)
 	return minus;
 }
 
-Complex operator-(const Complex& lhs, const double& rhs)
+Complex operator-(const Complex& lhs, const double rhs)
 {
 	Complex minus(lhs);
 	minus -= rhs;
 	return minus;
 }
 
-Complex operator-(const double& lhs, const Complex& rhs)
+Complex operator-(const double lhs, const Complex& rhs)
 {
 	Complex minus(rhs);
 	minus -= lhs;
@@ -120,14 +120,14 @@ Complex operator*(const Complex& lhs, const Complex& rhs)
 	return umn;
 }
 
-Complex operator*(const Complex& lhs, const double& rhs)
+Complex operator*(const Complex& lhs, const double rhs)
 {
 	Complex umn(lhs);
 	umn *= rhs;
 	return umn;
 }
 
-Complex operator*(const double& lhs, const Complex& rhs)
+Complex operator*(const double lhs, const Complex& rhs)
 {
 	Complex umn(rhs);
 	umn *= lhs;
@@ -141,21 +141,21 @@ Complex operator/(const Complex& lhs, const Complex& rhs)
 	return raz;
 }
 
-Complex operator/(const Complex& lhs, const double& rhs)
+Complex operator/(const Complex& lhs, const double rhs)
 {
 	Complex raz(lhs);
 	raz /= rhs;
 	return raz;
 }
 
-Complex operator/(const double& lhs, const Complex& rhs)
+Complex operator/(const double lhs, const Complex& rhs)
 {
 	Complex raz(lhs);
 	raz /= rhs;
 	return raz;
 }
 
-bool operator==(const Complex& lhs, const double& rhs) 
+bool operator==(const Complex& lhs, const double rhs) 
 {
 	if (lhs.im == 0 && std::abs(lhs.re - rhs) < eps) {
 		return true;
@@ -163,7 +163,7 @@ bool operator==(const Complex& lhs, const double& rhs)
 	return false;
 }
 
-bool operator==(const double& lhs, const Complex& rhs)
+bool operator==(const double lhs, const Complex& rhs)
 {
 	if (rhs.im == 0 && std::abs(rhs.re - lhs) < eps) {
 		return true;
@@ -171,12 +171,12 @@ bool operator==(const double& lhs, const Complex& rhs)
 	return false;
 }
 
-bool operator!=(const Complex& lhs, const double& rhs)
+bool operator!=(const Complex& lhs, const double rhs)
 {
 	return !(lhs == rhs);
 }
 
-bool operator!=(const double& lhs, const Complex& rhs)
+bool operator!=(const double lhs, const Complex& rhs)
 {
 	return !(lhs == rhs);
 }

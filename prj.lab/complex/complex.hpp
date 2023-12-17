@@ -11,7 +11,6 @@ struct Complex {
 	Complex() = default;
 	~Complex() = default;
 	explicit Complex(const double real) : re(real) { }
-	Complex(Complex&&) = default;
 	Complex(const Complex&) = default;
 	Complex(const double real, const double imaginary) : re(real), im(imaginary) {}
 	Complex& operator+=(const Complex& rhs);
@@ -48,25 +47,25 @@ inline std::istream& operator>>(std::istream& istrm, Complex& rhs);
 
 
 Complex operator+(const Complex& lhs, const Complex& rhs);
-Complex operator+(const Complex& lhs, const double& rhs);
-Complex operator+(const double& lhs, const Complex& rhs);
+Complex operator+(const Complex& lhs, const double rhs);
+Complex operator+(const double lhs, const Complex& rhs);
 
 Complex operator-(const Complex& lhs, const Complex& rhs);
-Complex operator-(const double& lhs, const Complex& rhs);
-Complex operator-(const Complex& lhs, const double& rhs);
+Complex operator-(const double lhs, const Complex& rhs);
+Complex operator-(const Complex& lhs, const double rhs);
 
 Complex operator*(const Complex& lhs, const Complex& rhs);
-Complex operator*(const Complex& lhs, const double& rhs);
-Complex operator*(const double& lhs, const Complex& rhs);
+Complex operator*(const Complex& lhs, const double rhs);
+Complex operator*(const double lhs, const Complex& rhs);
 
 Complex operator/(const Complex& lhs, const Complex& rhs);
-Complex operator/(const Complex& lhs, const double& rhs);
-Complex operator/(const double& lhs, const Complex& rhs);
+Complex operator/(const Complex& lhs, const double rhs);
+Complex operator/(const double lhs, const Complex& rhs);
 
-bool operator==(const Complex& lhs, const double& rhs);
-bool operator==(const double& lhs, const Complex& rhs);
+bool operator==(const Complex& lhs, const double rhs);
+bool operator==(const double lhs, const Complex& rhs);
 
-bool operator!=(const Complex& lhs, const double& rhs);
-bool operator!=(const double& lhs, const Complex& rhs);
+bool operator!=(const Complex& lhs, const double rhs);
+bool operator!=(const double lhs, const Complex& rhs);
 
 #endif
