@@ -327,18 +327,52 @@ std::ostream& Rational::writeTo(std::ostream& ostrm) const {
 }
 
 std::istream& Rational::readFrom(std::istream& istrm) {
-	char separator(0);
 	std::int64_t num(0);
-	std::int64_t denum(0);
-	istrm >> num >> separator >> denum;
-	if ((istrm.good()) || (!istrm.fail() && !istrm.bad() && istrm.eof())) {
-		if (Rational::separator == separator && denum!=0) {
-			n_ = num;
-			de_ = denum;
-		}
-		else {
+	std::int64_t den(0);
+	char ch(' ');
+	char sep('/');
+	bool a(0);
+
+	while (std::isspace(istrm.peek())) {
+		ch = istrm.get();
+	}
+	if (istrm.peek() == '-') {
+		a = 1;
+		ch = istrm.get();
+	}
+	while (std::isdigit(istrm.peek())) {
+		ch = istrm.get();
+		num *= 10;
+		num += static_cast<int>(ch - '0');
+	}
+	if (ch == '-') {
+		istrm.setstate(std::ios_base::failbit);
+		return istrm;
+	}
+	if (istrm.peek() != sep) {
+		istrm.setstate(std::ios_base::failbit);
+	}
+	ch = istrm.get();
+	while (std::isdigit(istrm.peek())) {
+		ch = istrm.get();
+		den *= 10;
+		den += static_cast<int>(ch - '0');
+	}
+	if (ch == sep) {
+		istrm.setstate(std::ios_base::failbit);
+		return istrm;
+	}
+	if (istrm.good() || istrm.eof()) {
+		if (den == 0) {
 			istrm.setstate(std::ios_base::failbit);
+			return istrm;
 		}
+		n_ = num;
+		de_ = den;
+		if (a) {
+			n_ *= -1;
+		}
+		cut_back();
 	}
 	return istrm;
 }
