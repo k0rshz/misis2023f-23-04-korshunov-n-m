@@ -32,6 +32,26 @@ double getIm(const Complex& lhs) {
 	return lhs.im;
 }
 
+Complex& Complex::operator=(const double rhs) {
+	return operator=(Complex(rhs)); 
+}
+
+Complex& Complex::operator/=(const double rhs) {
+	return operator/=(Complex(rhs)); 
+}
+
+Complex& Complex::operator*=(const double rhs) { 
+	return operator*=(Complex(rhs)); 
+}
+
+Complex& Complex::operator-=(const double rhs) { 
+	return operator-=(Complex(rhs)); 
+}
+
+Complex& Complex::operator+=(const double rhs) {
+	return operator+=(Complex(rhs)); 
+}
+
 Complex& Complex::operator+=(const Complex& rhs)
 {
 	re += rhs.re;

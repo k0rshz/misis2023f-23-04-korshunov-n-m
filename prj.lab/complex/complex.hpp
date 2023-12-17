@@ -14,15 +14,15 @@ struct Complex {
 	Complex(const Complex&) = default;
 	Complex(const double real, const double imaginary) : re(real), im(imaginary) {}
 	Complex& operator+=(const Complex& rhs);
-	Complex& operator+=(const double rhs) { return operator+=(Complex(rhs)); }
+	Complex& operator+=(const double rhs);
 	Complex& operator-=(const Complex& rhs);
-	Complex& operator-=(const double rhs) { return operator-=(Complex(rhs)); }
+	Complex& operator-=(const double rhs);
 	Complex& operator*=(const Complex& rhs);
-	Complex& operator*=(const double rhs) { return operator*=(Complex(rhs)); }
+	Complex& operator*=(const double rhs);
 	Complex& operator/=(const Complex& rhs);
-	Complex& operator/=(const double rhs) { return operator/=(Complex(rhs)); }
+	Complex& operator/=(const double rhs);
 	Complex& operator=(const Complex&) = default;
-	Complex& operator=(const double rhs) { return operator=(Complex(rhs)); }
+	Complex& operator=(const double rhs);
 	Complex operator-() const { return Complex(-re, -im); }
 	bool operator==(const Complex& rhs) const { return (std::abs(re - rhs.re) < eps) && (std::abs(im - rhs.im) < eps); }
 	bool operator!=(const Complex& rhs) const { return !operator==(rhs); }
