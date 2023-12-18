@@ -13,8 +13,8 @@ DynArr::DynArr(DynArr const& a)
 }
 
 DynArr::DynArr(const std::ptrdiff_t sizeNew) {
-    if (sizeNew < 0) {
-        throw std::overflow_error("Error: Size cannot be less than or equal to zero");
+    if (sizeNew <0) {
+        throw std::overflow_error("Error: Size cannot be less than zero");
     }
     else if (sizeNew == 0) {
         size_ = 0;
