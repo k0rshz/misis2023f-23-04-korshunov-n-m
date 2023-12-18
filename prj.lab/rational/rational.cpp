@@ -20,12 +20,12 @@ Rational::Rational(const std::int64_t num, const std::int64_t denum)
 	cut_back();
 }
 
-std::ostream& operator<<(std::ostream& ostrm, const Rational& rhs)
+inline std::ostream& operator<<(std::ostream& ostrm, const Rational& rhs)
 {
 	return rhs.writeTo(ostrm);
 }
 
-std::istream& operator>>(std::istream& istrm, Rational& rhs)
+inline std::istream& operator>>(std::istream& istrm, Rational& rhs)
 {
 	return rhs.readFrom(istrm);
 }

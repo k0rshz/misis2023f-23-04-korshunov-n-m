@@ -51,8 +51,8 @@ private:
 
 bool testParse(const std::string& str);
 
-std::ostream& operator<<(std::ostream& ostrm, const Rational& rhs);
-std::istream& operator>>(std::istream& istrm, Rational& rhs);
+inline std::ostream& operator<<(std::ostream& ostrm, const Rational& rhs);
+inline std::istream& operator>>(std::istream& istrm, Rational& rhs);
 
 Rational operator+(const Rational& lhs, const Rational& rhs);
 Rational operator+(const Rational& lhs, const std::int64_t& rhs);
