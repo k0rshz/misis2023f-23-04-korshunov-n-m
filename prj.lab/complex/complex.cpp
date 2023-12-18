@@ -1,12 +1,10 @@
 #include "complex.hpp"
 
-inline std::ostream& operator<<(std::ostream& ostrm, const Complex& rhs)
-{
+inline std::ostream& operator<<(std::ostream& ostrm, const Complex& rhs) {
 	return rhs.writeTo(ostrm);
 }
 
-inline std::istream& operator>>(std::istream& istrm, Complex& rhs)
-{
+inline std::istream& operator>>(std::istream& istrm, Complex& rhs) {
 	return rhs.readFrom(istrm);
 }
 
@@ -87,7 +85,7 @@ Complex& Complex::operator/=(const Complex& rhs)
 		im = (im * rhs.re - k * rhs.im) / (rhs.im * rhs.im + rhs.re * rhs.re);
 		return *this;
 	}
-	throw std::overflow_error("Error: Division by zero");
+	throw std::invalid_argument("Division by zero");
 }
 
 Complex operator+(const Complex& lhs, const Complex& rhs)

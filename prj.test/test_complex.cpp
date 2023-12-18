@@ -161,7 +161,7 @@ int main() {
 	try {
 		std::cout << x / y << "\n";
 	}
-	catch (std::overflow_error& e) {
+	catch (std::invalid_argument& e) {
 		std::cout << x << " / " << y << " --> " << e.what() << "\n";
 	}
 	std::cout << std::endl;
