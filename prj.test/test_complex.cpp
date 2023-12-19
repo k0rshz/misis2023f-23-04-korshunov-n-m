@@ -166,11 +166,6 @@ int main() {
 	}
 	std::cout << std::endl;
 
-	// получение реальной и мнимой части
-	x = Complex{ 4.1, 2 };
-	std::cout << x << " --> " << getRe(x) << "\n";
-	std::cout << x << " --> " << getIm(x) << "\n";
-
 	// унарный минус
 	x = Complex{ 1.5, -2 };
 	std::cout << -x << " Expected: {-1.5,2}\n";

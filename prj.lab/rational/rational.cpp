@@ -1,21 +1,21 @@
 #include "rational.hpp"
 
 Rational::Rational(const std::int64_t num, const std::int64_t denum)
-	: n_(num), de_(denum) {
-	if (0 == de_) {
+	: num_(num), den_(denum) {
+	if (0 == den_) {
 		throw std::overflow_error("Error: Division by zero");
 	}
-	if (de_ < 0) {
-		de_ = -denum;
-		n_ = -num;
+	if (den_ < 0) {
+		den_ = -denum;
+		num_ = -num;
 	}
-	else if (n_ == 0) {
-		n_ = num;
-		de_ = 1;
+	else if (num_ == 0) {
+		num_ = num;
+		den_ = 1;
 	}
 	else {
-		n_ = num;
-		de_ = denum;
+		num_ = num;
+		den_ = denum;
 	}
 	cut_back();
 }
@@ -50,10 +50,10 @@ std::int64_t Rational::NOD(std::int64_t x, std::int64_t y) {
 }
 
 void Rational::cut_back() {
-	std::int64_t d = Rational::NOD(n_, de_);
+	std::int64_t d = Rational::NOD(num_, den_);
 	if (d != 0) {
-		n_ /= d;
-		de_ /= d;
+		num_ /= d;
+		den_ /= d;
 	}
 }
 
@@ -63,65 +63,65 @@ Rational::Rational(const std::int64_t num)
 }
 
 Rational& Rational::operator=(const Rational& rhs) {
-	n_ = rhs.n_;
-	de_ = rhs.de_;
+	num_ = rhs.num_;
+	den_ = rhs.den_;
 	return *this;
 }
 
 Rational& Rational::operator+=(const Rational& rhs) {
-	if (de_ == rhs.de_) {
-		n_ += rhs.n_;
+	if (den_ == rhs.den_) {
+		num_ += rhs.num_;
 	}
 	else {
-		std::int64_t a = Rational::NOK(de_, rhs.de_);
-		n_ = n_ * a / de_ + rhs.n_ * a / rhs.de_;
-		de_ = a;
+		std::int64_t a = Rational::NOK(den_, rhs.den_);
+		num_ = num_ * a / den_ + rhs.num_ * a / rhs.den_;
+		den_ = a;
 	}
 	cut_back();
 	return *this;
 }
 
 Rational& Rational::operator*=(const Rational& rhs) {
-	n_ *= rhs.n_;
-	de_ *= rhs.de_;
+	num_ *= rhs.num_;
+	den_ *= rhs.den_;
 	cut_back();
 	return *this;
 }
 
 Rational& Rational::operator/=(const Rational& rhs) {
-	n_ *= rhs.de_;
-	de_ *= rhs.n_;
+	num_ *= rhs.den_;
+	den_ *= rhs.num_;
 	cut_back();
 	return *this;
 }
 
 Rational& Rational::operator-=(const Rational& rhs) {
-	if (de_ == rhs.de_) {
-		n_ -= rhs.n_;
+	if (den_ == rhs.den_) {
+		num_ -= rhs.num_;
 	}
 	else {
-		std::int64_t a = Rational::NOK(de_, rhs.de_);
-		n_ = n_ * a / de_ - rhs.n_ * a / rhs.de_;
-		de_ = a;
+		std::int64_t a = Rational::NOK(den_, rhs.den_);
+		num_ = num_ * a / den_ - rhs.num_ * a / rhs.den_;
+		den_ = a;
 	}
 	cut_back();
 	return *this;
 }
 
 Rational& Rational::operator++() {
-	n_ += de_;
+	num_ += den_;
 	cut_back();
 	return *this;
 }
 
 Rational& Rational::operator--() {
-	n_ -= de_;
+	num_ -= den_;
 	cut_back();
 	return *this;
 }
 
 Rational& Rational::operator-() {
-	n_ *= -1;
+	num_ *= -1;
 	return *this;
 }
 
@@ -322,7 +322,7 @@ bool testParse(const std::string& str) {
 }
 
 std::ostream& Rational::writeTo(std::ostream& ostrm) const {
-	ostrm << n_ << separator << de_;
+	ostrm << num_ << separator << den_;
 	return ostrm;
 }
 
@@ -367,10 +367,10 @@ std::istream& Rational::readFrom(std::istream& istrm) {
 			istrm.setstate(std::ios_base::failbit);
 			return istrm;
 		}
-		n_ = num;
-		de_ = den;
+		num_ = num;
+		den_ = den;
 		if (a) {
-			n_ *= -1;
+			num_ *= -1;
 		}
 		cut_back();
 	}

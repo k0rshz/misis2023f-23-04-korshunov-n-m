@@ -42,8 +42,8 @@ bool testParse(const std::string& str);
 double getRe(const Complex& re);
 double getIm(const Complex& im);
 
-inline std::ostream& operator<<(std::ostream& ostrm, const Complex& rhs);
-inline std::istream& operator>>(std::istream& istrm, Complex& rhs);
+std::ostream& operator<<(std::ostream& ostrm, const Complex& rhs);
+std::istream& operator>>(std::istream& istrm, Complex& rhs);
 
 
 Complex operator+(const Complex& lhs, const Complex& rhs);

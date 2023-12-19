@@ -1,10 +1,10 @@
 #include "complex.hpp"
 
-inline std::ostream& operator<<(std::ostream& ostrm, const Complex& rhs) {
+std::ostream& operator<<(std::ostream& ostrm, const Complex& rhs) {
 	return rhs.writeTo(ostrm);
 }
 
-inline std::istream& operator>>(std::istream& istrm, Complex& rhs) {
+std::istream& operator>>(std::istream& istrm, Complex& rhs) {
 	return rhs.readFrom(istrm);
 }
 
@@ -22,16 +22,10 @@ bool testParse(const std::string& str)
 	return istrm.good();
 }
 
-double getRe(const Complex& lhs) {
-	return lhs.re;
-}
-
-double getIm(const Complex& lhs) {
-	return lhs.im;
-}
-
 Complex& Complex::operator=(const double rhs) {
-	return operator=(Complex(rhs)); 
+	re = rhs;
+	im = 0.0;
+	return *this;
 }
 
 Complex& Complex::operator/=(const double rhs) {
