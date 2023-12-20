@@ -39,9 +39,6 @@ struct Complex {
 
 bool testParse(const std::string& str);
 
-double getRe(const Complex& re);
-double getIm(const Complex& im);
-
 std::ostream& operator<<(std::ostream& ostrm, const Complex& rhs);
 std::istream& operator>>(std::istream& istrm, Complex& rhs);
 
