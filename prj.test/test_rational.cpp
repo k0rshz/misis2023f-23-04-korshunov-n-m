@@ -95,14 +95,6 @@ TEST_CASE("less") {
 	CHECK(std::int64_t(17) <= Rational(187, 11));
 }
 
-//TEST_CASE("extra tests") {
-//	Rational x{ 251, 100000000 };
-//	Rational y{ 531, 1000000000000000 };
-//	x -= y;
-//	std::cout << x << "\n";
-//	CHECK((x.num() == 2509999469 && x.den() == 1000000000000000));
-//}
-
 /*int main() {
 	Rational x, y;
 	int64_t a;
