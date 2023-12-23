@@ -1,4 +1,4 @@
-CHECK: 20231220-115140
+CHECK: 20231223-122115
 STATUS: lab complex - test-ok
 STATUS: lab complex_io - test-ok
 ERROR: lab rational - test build failed
