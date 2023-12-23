@@ -52,9 +52,7 @@ TEST_CASE("/") {
 	CHECK_THROWS(Rational(4, 6) / std::int64_t(0));
 }
 
-TEST_CASE("inc_dec_unarminus") {
-	CHECK(Rational(13, 5) == (++Rational(8, 5)));
-	CHECK(Rational(8, 5) == (--Rational(13, 5)));
+TEST_CASE("unarminus") {
 	CHECK(Rational(-33, 6) == (-Rational(11, 2)));
 }
 

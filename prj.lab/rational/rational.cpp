@@ -20,12 +20,12 @@ Rational::Rational(const std::int64_t num, const std::int64_t denum)
 	cut_back();
 }
 
-inline std::ostream& operator<<(std::ostream& ostrm, const Rational& rhs)
+std::ostream& operator<<(std::ostream& ostrm, const Rational& rhs)
 {
 	return rhs.writeTo(ostrm);
 }
 
-inline std::istream& operator>>(std::istream& istrm, Rational& rhs)
+std::istream& operator>>(std::istream& istrm, Rational& rhs)
 {
 	return rhs.readFrom(istrm);
 }
@@ -55,17 +55,6 @@ void Rational::cut_back() {
 		num_ /= d;
 		den_ /= d;
 	}
-}
-
-Rational::Rational(const std::int64_t num)
-	: Rational(num, 1)
-{
-}
-
-Rational& Rational::operator=(const Rational& rhs) {
-	num_ = rhs.num_;
-	den_ = rhs.den_;
-	return *this;
 }
 
 Rational& Rational::operator+=(const Rational& rhs) {
@@ -104,18 +93,6 @@ Rational& Rational::operator-=(const Rational& rhs) {
 		num_ = num_ * a / den_ - rhs.num_ * a / rhs.den_;
 		den_ = a;
 	}
-	cut_back();
-	return *this;
-}
-
-Rational& Rational::operator++() {
-	num_ += den_;
-	cut_back();
-	return *this;
-}
-
-Rational& Rational::operator--() {
-	num_ -= den_;
 	cut_back();
 	return *this;
 }
@@ -322,7 +299,7 @@ bool testParse(const std::string& str) {
 }
 
 std::ostream& Rational::writeTo(std::ostream& ostrm) const {
-	ostrm << num_ << separator << den_;
+	ostrm << num_ << '/' << den_;
 	return ostrm;
 }
 
@@ -339,7 +316,7 @@ std::istream& Rational::readFrom(std::istream& istrm) {
 		return istrm;
 	}
 	if (istrm.good() || istrm.eof()) {
-		if (sep == Rational::separator && den > 0) {
+		if (sep == '/' && den > 0) {
 			num_ = num;
 			den_ = den;
 		}
